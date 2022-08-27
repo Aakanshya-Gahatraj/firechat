@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           // user!.displayName!,
-          "Hello",
+          "Chat App",
           style: appBarTheme,
         ),
         actions: <Widget>[

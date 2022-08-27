@@ -4,6 +4,8 @@ import 'package:firechat/loading.dart';
 import 'package:firechat/styles.dart';
 import 'package:flutter/material.dart';
 
+import 'register.dart';
+
 class LandingScreen extends StatelessWidget {
   LandingScreen({Key? key}) : super(key: key);
   final emailController = TextEditingController();
@@ -34,6 +36,12 @@ class LandingScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
+                  SizedBox(height: 70),
+                  Text("Chat App",
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 244, 152, 32),
+                          fontSize: 35,
+                          fontWeight: FontWeight.bold)),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(30.0, 60.0, 30.0, 20.0),
                     child: TextField(
@@ -90,6 +98,36 @@ class LandingScreen extends StatelessWidget {
                                 MaterialPageRoute(
                                     builder: (_) => const HomeScreen()));
                           });
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Center(
+                    child: SizedBox(
+                      width: 225,
+                      height: 50,
+                      child: ElevatedButton(
+                        child: Row(
+                          children: const [
+                            Icon(
+                              Icons.app_registration_rounded,
+                              size: 30.0,
+                            ),
+                            SizedBox(width: 10.0),
+                            Text(
+                              "REGISTER",
+                              textAlign: TextAlign.center,
+                              style: googleText,
+                            ),
+                          ],
+                        ),
+                        onPressed: () {
+                          // Handle sign in
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => const Register()));
                         },
                       ),
                     ),
