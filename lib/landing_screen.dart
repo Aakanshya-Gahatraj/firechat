@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firechat/auth_provider.dart';
 import 'package:firechat/home_screen.dart';
 import 'package:firechat/loading.dart';
 import 'package:firechat/styles.dart';
@@ -9,6 +8,7 @@ class LandingScreen extends StatelessWidget {
   LandingScreen({Key? key}) : super(key: key);
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,7 @@ class LandingScreen extends StatelessWidget {
                             ),
                             SizedBox(width: 10.0),
                             Text(
-                              "GOOGLE SIGN IN",
+                              "SIGN IN",
                               textAlign: TextAlign.center,
                               style: googleText,
                             ),
@@ -80,9 +80,16 @@ class LandingScreen extends StatelessWidget {
                         ),
                         onPressed: () {
                           // Handle sign in
-                          AuthProvider().signIn(
-                              (emailController.value).toString(),
-                              (passwordController.value).toString());
+                          auth
+                              .signInWithEmailAndPassword(
+                                  email: emailController.text.trim(),
+                                  password: passwordController.text.trim())
+                              .then((_) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const HomeScreen()));
+                          });
                         },
                       ),
                     ),

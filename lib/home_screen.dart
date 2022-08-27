@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firechat/auth_provider.dart';
 import 'package:firechat/bottom_chat_bar.dart';
+import 'package:firechat/landing_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firechat/loading.dart';
 import 'package:firechat/styles.dart';
-import 'package:flutter/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,11 +12,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
+    final auth = FirebaseAuth.instance;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          user!.displayName!,
+          // user!.displayName!,
+          "Hello",
           style: appBarTheme,
         ),
         actions: <Widget>[
@@ -27,7 +28,11 @@ class HomeScreen extends StatelessWidget {
               style: blackText,
             ),
             onPressed: () {
-              AuthProvider().signOut();
+              auth.signOut().then((_) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => LandingScreen()));
+              });
+              ;
 
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
@@ -155,12 +160,12 @@ class SentMessage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 10.0),
-                  CircleAvatar(
-                    radius: 20,
-                    backgroundImage: NetworkImage(
-                      data['imageUrl'],
-                    ),
-                  ),
+                  // CircleAvatar(
+                  //   radius: 20,
+                  //   backgroundImage: NetworkImage(
+                  //     data['imageUrl'],
+                  //   ),
+                  // ),
                 ],
               ),
             ),
@@ -202,12 +207,12 @@ class ReceivedMessage extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                CircleAvatar(
-                  radius: 20,
-                  backgroundImage: NetworkImage(
-                    data['imageUrl'],
-                  ),
-                ),
+                // CircleAvatar(
+                //   radius: 20,
+                //   backgroundImage: NetworkImage(
+                //     data['imageUrl'],
+                //   ),
+                // ),
                 const SizedBox(width: 10.0),
                 Flexible(
                   child: Text(

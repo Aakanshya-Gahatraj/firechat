@@ -31,7 +31,7 @@ class _BottomChatBarState extends State<BottomChatBar> {
             {
               "text": textController.text,
               "owner": user?.uid,
-              "imageUrl": user?.photoURL,
+              // "imageUrl": user?.photoURL,
               "createdAt": FieldValue.serverTimestamp(),
             },
           ).then(
